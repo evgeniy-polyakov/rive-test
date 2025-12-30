@@ -1,9 +1,5 @@
 import {Fit, Layout, Rive} from "@rive-app/canvas";
 
-const getLayoutScaleFactor = () => {
-    return Math.max(0.5, window.innerHeight / 1080);
-}
-
 const rive = new Rive({
     src: "assets/riv/t-rex.riv",
     canvas: document.getElementById("canvas") as HTMLCanvasElement,
@@ -15,11 +11,13 @@ const rive = new Rive({
         rive.resizeDrawingSurfaceToCanvas();
     },
     layout: new Layout({
-        fit: Fit.Layout,
-        layoutScaleFactor: getLayoutScaleFactor()
+        fit: Fit.Layout
     }),
 });
 
-window.addEventListener('resize', () => {
+const onResize = () => {
     rive.resizeDrawingSurfaceToCanvas();
-});
+};
+
+window.addEventListener("resize", onResize);
+window.addEventListener("orientationchange", onResize);
