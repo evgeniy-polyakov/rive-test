@@ -1,14 +1,23 @@
-import {Rive} from "@rive-app/canvas";
+import {Fit, Layout, Rive} from "@rive-app/canvas";
+
+const getLayoutScaleFactor = () => {
+    return Math.max(0.5, window.innerHeight / 1080);
+}
 
 const rive = new Rive({
     src: "assets/riv/t-rex.riv",
     canvas: document.getElementById("canvas") as HTMLCanvasElement,
     autoplay: true,
     autoBind: true,
-    stateMachines: "default",
+    artboard: "Main",
+    stateMachines: "MainStateMachine",
     onLoad: () => {
         rive.resizeDrawingSurfaceToCanvas();
     },
+    layout: new Layout({
+        fit: Fit.Layout,
+        layoutScaleFactor: getLayoutScaleFactor()
+    }),
 });
 
 window.addEventListener('resize', () => {
